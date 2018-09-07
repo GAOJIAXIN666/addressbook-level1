@@ -29,7 +29,6 @@ import java.util.Set;
  * use this class are documented elsewhere.
  * ====================================================================
  */
-
 /**
  * This class is used to maintain a list of person data which are saved
  * in a text file.
@@ -114,6 +113,8 @@ public class AddressBook {
     private static final String COMMAND_LIST_WORD = "list";
     private static final String COMMAND_LIST_DESC = "Displays all persons as a list with index numbers.";
     private static final String COMMAND_LIST_EXAMPLE = COMMAND_LIST_WORD;
+
+    private static final String COMMAND_LIST_REVERSE_WORD = "listReversed";
 
     private static final String COMMAND_DELETE_WORD = "delete";
     private static final String COMMAND_DELETE_DESC = "Deletes a person identified by the index number used in "
@@ -375,6 +376,8 @@ public class AddressBook {
             return executeFindPersons(commandArgs);
         case COMMAND_LIST_WORD:
             return executeListAllPersonsInAddressBook();
+        case COMMAND_LIST_REVERSE_WORD:
+            return executeListAllPersonsInAddressBook_reverse();
         case COMMAND_DELETE_WORD:
             return executeDeletePerson(commandArgs);
         case COMMAND_CLEAR_WORD:
@@ -578,7 +581,12 @@ public class AddressBook {
         showToUser(toBeDisplayed);
         return getMessageForPersonsDisplayedSummary(toBeDisplayed);
     }
-
+    private static String executeListAllPersonsInAddressBook_reverse() {
+        ArrayList<String[]> toBeDisplayed = getAllPersonsInAddressBook();
+        Collections.reverse(toBeDisplayed);
+        showToUser(toBeDisplayed);
+        return getMessageForPersonsDisplayedSummary(toBeDisplayed);
+    }
     /**
      * Requests to terminate the program.
      */
